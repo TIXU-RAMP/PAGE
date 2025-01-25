@@ -1,0 +1,119 @@
+/* Additional modern styles for the new HTML structure */
+
+/* Version badge styling */
+.version-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 255, 136, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+
+.badge-text {
+    font-weight: 600;
+}
+
+.version {
+    background: var(--primary-color);
+    color: var(--background-color);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
+/* Links grid styling */
+.links-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Card link styling */
+.card-link {
+    position: relative;
+    background: rgba(0, 255, 136, 0.05);
+    border: 1px solid rgba(0, 255, 136, 0.1);
+    padding: 20px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.card-link::before {
+    content: '';
+    position: absolute;
+    top: var(--y, 50%);
+    left: var(--x, 50%);
+    transform: translate(-50%, -50%);
+    width: 0px;
+    height: 0px;
+    background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+    opacity: 0;
+    transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+}
+
+.card-link:hover::before {
+    width: 200px;
+    height: 200px;
+    opacity: 0.1;
+}
+
+/* Icon styling */
+.card-link i {
+    font-size: 1.5em;
+    margin-right: 12px;
+    color: var(--primary-color);
+}
+
+/* Badge styling */
+.badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 255, 136, 0.2);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7em;
+    font-weight: 600;
+}
+
+/* Footer styling */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.social-link {
+    padding: 8px;
+    margin: 0 8px;
+    border-radius: 50%;
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.social-link:hover {
+    transform: translateY(-4px);
+}
+
+/* Subtitle styling */
+.subtitle {
+    color: var(--primary-color);
+    opacity: 0.8;
+    margin-top: 8px;
+    font-weight: 400;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
