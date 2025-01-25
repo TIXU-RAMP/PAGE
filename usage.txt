@@ -1,0 +1,22 @@
+BUTTONS
+<button class="tab-button" data-tab="your_tab_id">
+    <i class="fas fa-icon_name"></i> Your Tab Title
+</button>
+
+TABS
+<div class="tab-content" id="your_tab_id">
+    <!-- Your content goes here -->
+</div>
+
+Content Section
+<div class="tab-content" id="your_tab_id">
+    <!-- Your content goes here -->
+</div>
+
+Add a New Link to Existing Tab
+<div class="link-card">
+    <a href="your_url" class="link">
+        <i class="fas fa-icon_name"></i>
+        Your Link Text
+    </a>
+</div>
