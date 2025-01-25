@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fevber Unblocker</title>
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Base styles */
+        :root {
+            --neon: #00ff00;
+            --glow: rgba(0, 255, 0, 0.3);
+            --dark: #000000;
+        }
+
+        body {
+            background: var(--dark);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+            animation: bgMove 20s infinite linear;
+        }
+
+        @keyframes bgMove {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var(--glow);
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon);
+            text-shadow: 0 0 10px var(--glow);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--glow);
+        }
+
+        /* Tab Buttons */
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var(--glow);
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--neon);
+            color: var(--neon);
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-button:hover {
+            background: var(--glow);
+            box-shadow: 0 0 15px var(--glow);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: var(--neon);
+            color: black;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: grid;
+        }
+
+        /* Link Cards */
+        .link-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glow);
+            border-radius: 15px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .link {
+            color: var(--neon);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .link:hover {
+            background: var(--glow);
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Header with Title and Subtitle -->
+    <header>
+        <h1>Fevber Unblocker</h1>
+        <p>Unblocker by Fevber</p>
+    </header>
+
+    <!-- Tab Buttons -->
+    <div class="tab-buttons">
+        <button class="tab-button active" data-tab="games">
+            <i class="fas fa-gamepad"></i> Games
+        </button>
+        <button class="tab-button" data-tab="tools">
+            <i class="fas fa-tools"></i> Tools
+        </button>
+        <button class="tab-button" data-tab="media">
+            <i class="fas fa-play"></i> Media
+        </button>
+        <!-- Add more buttons as needed -->
+    </div>
+
+    <!-- Tab Content Sections -->
+    <div class="tab-content active" id="games">
+        <div class="link-card">
+            <a href="https://store.steampowered.com/" class="link">
+                <i class="fab fa-steam"></i>
+                Steam Store
+            </a>
+        </div>
+        <div class="link-card">
+            <a href="https://www.ign.com/" class="link">
+                <i class="fas fa-newspaper"></i>
+                IGN
+            </a>
+        </div>
+    </div>
+
+    <div class="tab-content" id="tools">
+        <div class="link-card">
+            <a href="https://wavewanderv2.pages.dev/service/" class="link">
+                <i class="fas fa-unlock-alt"></i>
+                Unblocker
+            </a>
+        </div>
+    </div>
+
+    <div class="tab-content" id="media">
+        <div class="link-card">
+            <a href="https://www.youtube.com/" class="link">
+                <i class="fab fa-youtube"></i>
+                YouTube
+            </a>
+        </div>
+        <div class="link-card">
+            <a href="https://www.netflix.com/" class="link">
+                <i class="fas fa-film"></i>
+                Netflix
+            </a>
+        </div>
+    </div>
+
+    <!-- JavaScript for Tab Switching -->
+    <script>
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button and its content
+                button.classList.add('active');
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+  </html>
