@@ -1,4 +1,4 @@
-# 👏 Fevber 
+# 👏 TIXU
 
 ## ⚠️ Alert
 If u fork this credit Me like "Credits to fevber"
@@ -14,4 +14,4 @@ If u fork this credit Me like "Credits to fevber"
 just go in the website 
      ⇓
 ```css
-https://10deleted01.github.io/TIXU/
+https://10deleted01.github.io/A/
