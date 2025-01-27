@@ -16,9 +16,10 @@ Content Section
     </div>
 
 Add a New Link to Existing Tab
-<div class="link-card">
-    <a href="your_url" class="link">
-        <i class="fas fa-icon_name"></i>
-        Your Link Text
-    </a>
-</div>
+<div class="tab-content active" id="games">
+        <div class="link-card">
+            <a href="wiki.html" class="link">
+                <i class="fa-icon_name"></i>
+                Pŕοẋƴ 1
+            </a>
+        </div>
