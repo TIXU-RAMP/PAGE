@@ -9,9 +9,11 @@ TABS
 </div>
 
 Content Section
-<div class="tab-content" id="your_tab_id">
-    <!-- Your content goes here -->
-</div>
+<div class="tab-buttons">
+        <button class="tab-button active" data-tab="Tab ID">
+            <i class="fas fa-icon_name"></i> TAB Name
+        </button>
+    </div>
 
 Add a New Link to Existing Tab
 <div class="link-card">
