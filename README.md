@@ -5,7 +5,8 @@
 - do not rebrand the website
 
 ## 📝 credits
-- rammerhead: in proxys 
+- rammerhead: in proxys
+- SZ GAME'S: in games
 
 ## ⚡ Features
 
