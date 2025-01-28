@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIXU Unblocker</title>
-    <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <style>
-        /* Base styles */
         :root {
             --neon: #00ff00;
             --glow: rgba(0, 255, 0, 0.3);
@@ -25,7 +23,6 @@
             min-height: 100vh;
         }
 
-        /* Animated Background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -40,12 +37,10 @@
         }
 
         @keyframes bgMove {
-            0% { transform: scale(1); }
+            0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
         }
 
-        /* Header */
         header {
             text-align: center;
             margin-bottom: 3rem;
@@ -68,7 +63,6 @@
             color: var(--glow);
         }
 
-        /* Tab Buttons */
         .tab-buttons {
             display: flex;
             gap: 10px;
@@ -87,25 +81,17 @@
             color: var(--neon);
             border-radius: 10px;
             cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: 0.3s;
         }
 
-        .tab-button:hover {
-            background: var(--glow);
-            box-shadow: 0 0 15px var(--glow);
-            transform: translateY(-2px);
-        }
-
-        .tab-button.active {
+        .tab-button:hover, .tab-button.active {
             background: var(--neon);
             color: black;
         }
 
-        /* Tab Content */
         .tab-content {
             display: none;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -117,13 +103,12 @@
             display: grid;
         }
 
-        /* Link Cards */
         .link-card {
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--glow);
             border-radius: 15px;
             padding: 15px;
-            transition: all 0.3s;
+            transition: 0.3s;
         }
 
         .link-card:hover {
@@ -139,7 +124,7 @@
             gap: 10px;
             padding: 10px;
             border-radius: 8px;
-            transition: all 0.3s;
+            transition: 0.3s;
         }
 
         .link:hover {
@@ -154,73 +139,55 @@
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
     <div class="bg-animation"></div>
 
-    <!-- Header with Title and Subtitle -->
     <header>
         <h1>TIXU</h1>
         <p>Made from fevber now get back to work🔥</p>
     </header>
 
-    <!-- Tab -->
     <div class="tab-buttons">
-        <button class="tab-button active" data-tab="games">
-            <i class="fas fa-gamepad"></i> Pŕοẋƴ
-        </button>
+        <button class="tab-button active" data-tab="proxy"><i class="fas fa-gamepad"></i> Proxy</button>
+        <button class="tab-button" data-tab="games"><i class="fa-solid fa-dragon"></i> Games</button>
     </div>
-    <div class="tab-buttons">
-        <button class="tab-button active" data-tab="1">
-            <i class="fa-solid fa-dragon"></i> Games
-        </button>
-    </div>
-    <!-- Tabs button-->
-    
-    <div class="tab-content active" id="games">
+
+    <div class="tab-content active" id="proxy">
         <div class="link-card">
             <a href="https://geography.history-calender.awiki.hal.se/" class="link">
-                <i class="fa-solid fa-robot"></i>
-                Pŕοẋƴ 1
+                <i class="fa-solid fa-robot"></i> Proxy 1
             </a>
         </div>
         <div class="link-card">
             <a href="https://thingthingthingd.linville.net/" class="link">
-                <i class="fa-solid fa-robot"></i>
-                Pŕοẋƴ 2
+                <i class="fa-solid fa-robot"></i> Proxy 2
             </a>
         </div>
         <div class="link-card">
             <a href="https://education-lesson-pre-algebra-lesson68.eduarmor.com/" class="link">
-                <i class="fa-solid fa-robot"></i>
-                Pŕοẋƴ 3
+                <i class="fa-solid fa-robot"></i> Proxy 3
             </a>
         </div>
         <div class="link-card">
             <a href="https://freakybob.hs.vc/" class="link">
-                <i class="fa-solid fa-robot"></i>
-                Pŕοẋƴ 4
+                <i class="fa-solid fa-robot"></i> Proxy 4
             </a>
         </div>
     </div>
 
-    <div class="tab-content active" id="1">
+    <div class="tab-content" id="games">
         <div class="link-card">
             <a href="https://10deleted01.github.io/A/Games/BitLife.html" class="link">
-                <i class="fa-solid fa-web-awesome"></i>
-                BitLife
+                <i class="fa-solid fa-web-awesome"></i> BitLife
             </a>
         </div>
+    </div>
 
-
-    <!-- JavaScript for Tab Switching -->
     <script>
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active class from all buttons and contents
                 document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked button and its content
+
                 button.classList.add('active');
                 document.getElementById(button.dataset.tab).classList.add('active');
             });
