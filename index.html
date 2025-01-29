@@ -132,6 +132,24 @@
             transform: translateX(5px);
         }
 
+        .label-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glow);
+            border-radius: 15px;
+            padding: 15px;
+            transition: 0.3s;
+            color: var(--neon);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .label-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -148,11 +166,12 @@
 
     <div class="tab-buttons">
         <button class="tab-button active" data-tab="ALL"><i class="fa-solid fa-globe"></i> ALL</button>
-        <button class="tab-button active" data-tab="proxy"><i class="fas fa-gamepad"></i> Proxy</button>
+        <button class="tab-button" data-tab="proxy"><i class="fas fa-gamepad"></i> Proxy</button>
         <button class="tab-button" data-tab="games"><i class="fa-solid fa-dragon"></i> Games</button>
+        <button class="tab-button" data-tab="labels"><i class="fa-solid fa-comment"></i> Labels</button>
     </div>
 
-    <div class="tab-content active" id="proxy">
+    <div class="tab-content active" id="ALL">
         <div class="link-card">
             <a href="https://geography.history-calender.awiki.hal.se/" class="link">
                 <i class="fa-solid fa-robot"></i> Proxy 1
@@ -175,10 +194,33 @@
         </div>
     </div>
 
-    <div class="tab-content active" id="games">
+    <div class="tab-content" id="proxy">
+        <div class="link-card">
+            <a href="https://geography.history-calender.awiki.hal.se/" class="link">
+                <i class="fa-solid fa-robot"></i> Proxy 1
+            </a>
+        </div>
+        <div class="link-card">
+            <a href="https://thingthingthingd.linville.net/" class="link">
+                <i class="fa-solid fa-robot"></i> Proxy 2
+            </a>
+        </div>
+        <div class="link-card">
+            <a href="https://education-lesson-pre-algebra-lesson68.eduarmor.com/" class="link">
+                <i class="fa-solid fa-robot"></i> Proxy 3
+            </a>
+        </div>
+        <div class="link-card">
+            <a href="https://freakybob.hs.vc/" class="link">
+                <i class="fa-solid fa-robot"></i> Proxy 4
+            </a>
+        </div>
+    </div>
+
+    <div class="tab-content" id="games">
         <div class="link-card">
             <a href="https://10deleted01.github.io/A/Games/Slope.html" class="link">
-                <i class="fa-solid fa-bowling-ball"></i> slope
+                <i class="fa-solid fa-bowling-ball"></i> Slope
             </a>
         </div>
         <div class="link-card">
@@ -188,7 +230,7 @@
         </div>
         <div class="link-card">
             <a href="https://10deleted01.github.io/A/Games/Gun-spin.html" class="link">
-                <i class="fa-solid fa-gun"></i> Gun spin
+                <i class="fa-solid fa-gun"></i> Gun Spin
             </a>
         </div>
         <div class="link-card">
@@ -196,8 +238,23 @@
                 <i class="fa-solid fa-train"></i> Subway
             </a>
         </div>
-        
-    
+    </div>
+
+    <div class="tab-content" id="labels">
+        <div class="label-card">
+            <i class="fa-solid fa-comment"></i> This is a very cool label man
+        </div>
+        <div class="label-card">
+            <i class="fa-solid fa-comment"></i> Awesome proxy site
+        </div>
+        <div class="label-card">
+            <i class="fa-solid fa-comment"></i> Check this one out!
+        </div>
+        <div class="label-card">
+            <i class="fa-solid fa-comment"></i> Good for accessing blocked content
+        </div>
+    </div>
+
     <script>
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', () => {
