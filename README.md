@@ -1,5 +1,6 @@
-<img src="Water Splash.png" alt="fluent">
 <img src="Water Splash.png" alt="TIXU">
+
+### TIXU
 
 ### ⚠️ Alert
 - If u fork this credit Me like "Credits to fevber"
