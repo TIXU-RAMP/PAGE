@@ -17,3 +17,4 @@
 - very fast
 
 ## 🔌 Installation
+https://10deleted01.github.io/A/
