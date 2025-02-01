@@ -9,6 +9,7 @@
 ## 📝 credits
 - rammerhead: in proxys
 - SZ GAME'S: in games
+- Jay aka Fevber: recommendation
 
 ## ⚡ Features
 
