@@ -12,16 +12,22 @@
             --neon: #00ff00;
             --glow: rgba(0, 255, 0, 0.3);
             --dark: #000000;
+            --white: #ffffff;
         }
 
         body {
             background: var(--dark);
-            color: white;
+            color: var(--white);
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 20px;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         .tab-buttons {
@@ -39,7 +45,7 @@
             padding: 10px 20px;
             background: transparent;
             border: 2px solid var(--neon);
-            color: var(--neon);
+            color: var(--white);
             border-radius: 10px;
             cursor: pointer;
             transition: 0.3s;
@@ -99,6 +105,35 @@
         .key-button:hover {
             background: rgba(0, 255, 0, 0.8);
         }
+
+        .search-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            color: var(--neon);
+        }
+
+        .search-input {
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            border: 2px solid var(--neon);
+            background: transparent;
+            color: var(--white);
+        }
+
+        .tab-title {
+            font-size: 1.5rem;
+            color: var(--neon);
+            margin-bottom: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -114,7 +149,14 @@
         <button class="tab-button" data-tab="key"><i class="fa-solid fa-key"></i> Get Key</button>
     </div>
 
+    <!-- Search Container -->
+    <div class="search-container">
+        <label for="search-input" class="search-label">🔍 Search within this tab:</label>
+        <input type="text" class="search-input" id="search-input" placeholder="Type to search..." oninput="filterLinks()">
+    </div>
+
     <div class="tab-content" id="games">
+        <div class="tab-title">🎮 Games</div>
         <div class="link-card">
             <a href="https://TIXU-RAMP.github.io/PAGE/Games/Minecraft.html" class="link">
                 <i class="fa-solid fa-cube"></i> Minecraft
@@ -128,6 +170,7 @@
     </div>
 
     <div class="tab-content" id="proxy">
+        <div class="tab-title">🤖 Proxy</div>
         <div class="link-card">
             <a href="https://uwananinisiyokka.allez.la/" class="link">
                 <i class="fa-solid fa-robot"></i> Proxy 1
@@ -139,6 +182,33 @@
             </a>
         </div>
     </div>
-    
+
+    <script>
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tab = button.getAttribute('data-tab');
+
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.getElementById(tab).classList.add('active');
+            });
+        });
+
+        function filterLinks() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const links = document.querySelectorAll('.tab-content.active .link-card');
+
+            links.forEach(link => {
+                const linkText = link.innerText.toLowerCase();
+                if (linkText.includes(query)) {
+                    link.style.display = 'block';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
