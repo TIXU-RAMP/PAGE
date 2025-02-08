@@ -12,23 +12,66 @@
             --neon: #00ff00;
             --glow: rgba(0, 255, 0, 0.3);
             --dark: #000000;
-            --white: #ffffff;
-            --link-card: #333333; /* New color for the link-card */
         }
 
         body {
             background: var(--dark);
-            color: var(--neon); /* Updated text color to neon green */
+            color: white;
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 20px;
             min-height: 100vh;
-            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+            animation: bgMove 20s infinite linear;
+        }
+
+        @keyframes bgMove {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var(--glow);
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon);
+            text-shadow: 0 0 10px var(--glow);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 80%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid var(--neon);
+            border-radius: 10px;
+            background: transparent;
+            color: white;
+            outline: none;
         }
 
         .tab-buttons {
@@ -46,9 +89,12 @@
             padding: 10px 20px;
             background: transparent;
             border: 2px solid var(--neon);
-            color: var(--neon); /* Text color updated to neon green */
+            color: var(--neon);
             border-radius: 10px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             transition: 0.3s;
         }
 
@@ -59,26 +105,21 @@
 
         .tab-content {
             display: none;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
             animation: fadeIn 0.5s;
         }
 
         .tab-content.active {
-            display: block;
+            display: grid;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Link Cards */
         .link-card {
-            background: var(--link-card); /* Updated link-card color */
+            background: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--glow);
             border-radius: 15px;
             padding: 15px;
             transition: 0.3s;
-            margin: 10px;
         }
 
         .link-card:hover {
@@ -86,142 +127,82 @@
             box-shadow: 0 0 20px var(--glow);
         }
 
-        /* Key Section */
-        .key-section {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .key-button {
-            padding: 15px 30px;
-            background: var(--neon);
-            color: black;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
+        .link {
+            color: var(--neon);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
             transition: 0.3s;
         }
 
-        .key-button:hover {
-            background: rgba(0, 255, 0, 0.8);
+        .link:hover {
+            background: var(--glow);
+            transform: translateX(5px);
         }
 
-        .search-container {
-            margin-bottom: 20px;
-            text-align: center;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        .search-label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 1rem;
-            color: var(--neon); /* Label color updated to neon green */
-        }
-
-        .search-input {
-            padding: 10px;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 10px;
-            border: 2px solid var(--neon);
-            background: transparent;
-            color: var(--neon); /* Input text color updated to neon green */
-        }
-
-        .tab-title {
-            font-size: 1.5rem;
-            color: var(--neon); /* Tab title color updated to neon green */
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        /* Password Keyframe */
-        @keyframes password {
-            0% { opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .password-animation {
-            animation: password 1s infinite;
-        }
-
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
 
     <header>
         <h1>TIXU</h1>
-        <p>🔥 Made from fevber, now get back to work! 🔥</p>
+        <p>Made from fevber, now get back to work! 🔥</p>
     </header>
 
-    <div class="tab-buttons">
-        <button class="tab-button" data-tab="games"><i class="fas fa-gamepad"></i> Games</button>
-        <button class="tab-button" data-tab="proxy"><i class="fa-solid fa-robot"></i> Proxy</button>
-        <button class="tab-button" data-tab="key"><i class="fa-solid fa-key"></i> Get Key</button>
-    </div>
-
-    <!-- Search Container -->
     <div class="search-container">
-        <label for="search-input" class="search-label">🔍 Search within this tab:</label>
-        <input type="text" class="search-input" id="search-input" placeholder="Type to search..." oninput="filterLinks()">
+        <input type="text" class="search-box" id="searchInput" placeholder="Search...">
     </div>
 
-    <div class="tab-content" id="games">
-        <div class="tab-title">🎮 Games</div>
-        <div class="link-card">
-            <a href="https://TIXU-RAMP.github.io/PAGE/Games/Minecraft.html" class="link">
-                <i class="fa-solid fa-cube"></i> Minecraft
-            </a>
-        </div>
-        <div class="link-card">
-            <a href="https://TIXU-RAMP.github.io/PAGE/Games/Street-fighter-2.html" class="link">
-                <i class="fa-solid fa-user-ninja"></i> Street Fighter 2
-            </a>
-        </div>
+    <div class="tab-buttons">
+        <button class="tab-button" data-tab="proxy"><i class="fas fa-gamepad"></i> Proxy</button>
+        <button class="tab-button" data-tab="games"><i class="fa-solid fa-dragon"></i> Games</button>
+        <button class="tab-button" data-tab="languages"><i class="fa-solid fa-code"></i> Languages</button>
     </div>
 
     <div class="tab-content" id="proxy">
-        <div class="tab-title">🤖 Proxy</div>
-        <div class="link-card">
-            <a href="https://uwananinisiyokka.allez.la/" class="link">
-                <i class="fa-solid fa-robot"></i> Proxy 1
-            </a>
-        </div>
-        <div class="link-card">
-            <a href="https://sheneedaride.now1.tv/" class="link">
-                <i class="fa-solid fa-robot"></i> Proxy 2
-            </a>
-        </div>
+        <div class="link-card"><a href="https://proxy1.example" class="link"><i class="fa-solid fa-robot"></i> Proxy 1</a></div>
+        <div class="link-card"><a href="https://proxy2.example" class="link"><i class="fa-solid fa-robot"></i> Proxy 2</a></div>
+    </div>
+
+    <div class="tab-content" id="games">
+        <div class="link-card"><a href="https://tixu-games.com/minecraft" class="link"><i class="fa-solid fa-cube"></i> Minecraft</a></div>
+        <div class="link-card"><a href="https://tixu-games.com/slope" class="link"><i class="fa-solid fa-bowling-ball"></i> Slope</a></div>
+    </div>
+
+    <div class="tab-content" id="languages">
+        <div class="link-card"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" class="link"><i class="fa-brands fa-html5"></i> HTML</a></div>
+        <div class="link-card"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="link"><i class="fa-brands fa-css3-alt"></i> CSS</a></div>
+        <div class="link-card"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" class="link"><i class="fa-brands fa-js"></i> JavaScript</a></div>
+        <div class="link-card"><a href="https://www.python.org/doc/" class="link"><i class="fa-brands fa-python"></i> Python</a></div>
+        <div class="link-card"><a href="https://cplusplus.com/" class="link"><i class="fa-solid fa-code"></i> C++</a></div>
+        <div class="link-card"><a href="https://dev.java/" class="link"><i class="fa-brands fa-java"></i> Java</a></div>
     </div>
 
     <script>
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', () => {
-                const tab = button.getAttribute('data-tab');
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-
-                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-                document.getElementById(tab).classList.add('active');
+                document.getElementById(button.dataset.tab).classList.add('active');
             });
         });
 
-        function filterLinks() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const links = document.querySelectorAll('.tab-content.active .link-card');
-
-            links.forEach(link => {
-                const linkText = link.innerText.toLowerCase();
-                if (linkText.includes(query)) {
-                    link.style.display = 'block';
-                } else {
-                    link.style.display = 'none';
-                }
+        document.getElementById("searchInput").addEventListener("input", function() {
+            let filter = this.value.toLowerCase();
+            document.querySelectorAll('.link-card').forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(filter) ? "block" : "none";
             });
-        }
+        });
     </script>
 </body>
 </html>
