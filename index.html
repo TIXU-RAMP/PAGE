@@ -21,172 +21,140 @@
             margin: 0;
             padding: 20px;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
-            animation: bgMove 20s infinite linear;
-        }
-
-        @keyframes bgMove {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 15px;
             background: rgba(0, 0, 0, 0.5);
             border-radius: 15px;
             border: 1px solid var(--glow);
-            box-shadow: 0 0 15px var(--glow);
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            color: var(--neon);
-            text-shadow: 0 0 10px var(--glow);
-        }
-
-        /* Search Bar */
-        .search-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .search-container input {
-            padding: 10px;
-            width: 50%;
-            border: 2px solid var(--neon);
+        .tab-button {
+            padding: 10px 20px;
             background: transparent;
-            color: white;
-            font-size: 1rem;
-            text-align: center;
+            border: 2px solid var(--neon);
+            color: var(--neon);
+            border-radius: 10px;
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .search-container input:focus {
-            outline: none;
-            box-shadow: 0 0 10px var(--glow);
+        .tab-button:hover, .tab-button.active {
+            background: var(--neon);
+            color: black;
         }
 
-        /* Shake animation */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
         }
 
-        .wrong-password {
-            animation: shake 0.3s;
-            border: 2px solid red !important;
+        .tab-content.active {
+            display: block;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Link Cards */
+        .link-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glow);
+            border-radius: 15px;
+            padding: 15px;
+            transition: 0.3s;
+            margin: 10px;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        /* Key Section */
+        .key-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .key-button {
+            padding: 15px 30px;
+            background: var(--neon);
+            color: black;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .key-button:hover {
+            background: rgba(0, 255, 0, 0.8);
+        }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
 
     <header>
         <h1>TIXU</h1>
-        <p>Made from fevber now get back to work🔥</p>
+        <p>🔥 Made from fevber, now get back to work! 🔥</p>
     </header>
 
-    <!-- Search Bar -->
-    <div class="search-container">
-        <input type="text" id="searchBar" placeholder="Search something...">
-    </div>
-
     <div class="tab-buttons">
-        <button class="tab-button" data-tab="proxy"><i class="fas fa-gamepad"></i> Proxy</button>
-        <button class="tab-button" data-tab="games"><i class="fa-solid fa-dragon"></i> Games</button>
-        <button class="tab-button" data-tab="languages"><i class="fa-solid fa-code"></i> Languages</button>
-    </div>
-
-    <div class="tab-content" id="proxy">
-        <div class="link-card">
-            <a href="#" class="link"><i class="fa-solid fa-robot"></i> Proxy 1</a>
-        </div>
+        <button class="tab-button" data-tab="games"><i class="fas fa-gamepad"></i> Games</button>
+        <button class="tab-button" data-tab="proxy"><i class="fa-solid fa-robot"></i> Proxy</button>
+        <button class="tab-button" data-tab="key"><i class="fa-solid fa-key"></i> Get Key</button>
     </div>
 
     <div class="tab-content" id="games">
         <div class="link-card">
-            <a href="#" class="link"><i class="fa-solid fa-bowling-ball"></i> Slope</a>
+            <a href="https://TIXU-RAMP.github.io/PAGE/Games/Minecraft.html" class="link">
+                <i class="fa-solid fa-cube"></i> Minecraft
+            </a>
+        </div>
+        <div class="link-card">
+            <a href="https://TIXU-RAMP.github.io/PAGE/Games/Street-fighter-2.html" class="link">
+                <i class="fa-solid fa-user-ninja"></i> Street Fighter 2
+            </a>
         </div>
     </div>
 
-    <div class="tab-content" id="languages">
-        <div class="label-card">
-            <i class="fa-solid fa-code"></i> HTML
+    <div class="tab-content" id="proxy">
+        <div class="link-card">
+            <a href="https://uwananinisiyokka.allez.la/" class="link">
+                <i class="fa-solid fa-robot"></i> Proxy 1
+            </a>
         </div>
-        <div class="label-card">
-            <i class="fa-solid fa-code"></i> CSS
-        </div>
-        <div class="label-card">
-            <i class="fa-solid fa-code"></i> JavaScript
-        </div>
-        <div class="label-card">
-            <i class="fa-solid fa-code"></i> Python
-        </div>
-        <div class="label-card">
-            <i class="fa-solid fa-code"></i> Lua
+        <div class="link-card">
+            <a href="https://sheneedaride.now1.tv/" class="link">
+                <i class="fa-solid fa-robot"></i> Proxy 2
+            </a>
         </div>
     </div>
 
-    <!-- Password Modal -->
-    <div class="password-modal" id="passwordModal">
-        <form id="passwordForm">
-            <input type="password" id="password" placeholder="Enter password" required>
-            <button type="submit">Submit</button>
-        </form>
-        <button class="lootlink-button" onclick="window.location.href='https://paste.ee/r/7VrOxy7q';">Key</button>
+    <div class="tab-content" id="key">
+        <div class="key-section">
+            <p>Need the key? Click below to get it!</p>
+            <button class="key-button" onclick="window.location.href='https://paste.ee/r/7VrOxy7q';">Get Key</button>
+        </div>
     </div>
 
     <script>
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', () => {
-                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-                button.classList.add('active');
                 document.getElementById(button.dataset.tab).classList.add('active');
             });
         });
-
-        const correctPassword = "02860";
-
-        document.getElementById('passwordForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const input = document.getElementById('password');
-            if (input.value === correctPassword) {
-                document.getElementById('passwordModal').classList.remove('active');
-            } else {
-                input.classList.add('wrong-password');
-                setTimeout(() => input.classList.remove('wrong-password'), 300);
-            }
-        });
-
-        window.onload = () => {
-            document.getElementById('passwordModal').classList.add('active');
-        };
-
-        document.getElementById('searchBar').addEventListener('input', function() {
-            let filter = this.value.toLowerCase();
-            document.querySelectorAll('.link-card, .label-card').forEach(item => {
-                let text = item.textContent.toLowerCase();
-                item.style.display = text.includes(filter) ? '' : 'none';
-            });
-        });
     </script>
+
 </body>
 </html>
