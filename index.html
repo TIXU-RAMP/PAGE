@@ -13,6 +13,7 @@
             --glow: rgba(0, 255, 0, 0.3);
             --dark: #000000;
             --white: #ffffff;
+            --link-card: #333333; /* New color for the link-card */
         }
 
         body {
@@ -72,7 +73,7 @@
 
         /* Link Cards */
         .link-card {
-            background: rgba(0, 0, 0, 0.5);
+            background: var(--link-card); /* Updated link-card color */
             border: 1px solid var(--glow);
             border-radius: 15px;
             padding: 15px;
@@ -134,6 +135,18 @@
             margin-bottom: 10px;
             text-align: center;
         }
+
+        /* Password Keyframe */
+        @keyframes password {
+            0% { opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .password-animation {
+            animation: password 1s infinite;
+        }
+
     </style>
 </head>
 <body>
