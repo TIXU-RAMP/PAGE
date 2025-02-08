@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIXU - Key Gate</title>
+    <title>TIXU</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -12,7 +12,6 @@
             --neon: #00ff00;
             --glow: rgba(0, 255, 0, 0.3);
             --dark: #000000;
-            --error: #ff0000;
         }
 
         body {
@@ -22,41 +21,77 @@
             margin: 0;
             padding: 20px;
             min-height: 100vh;
-            text-align: center;
+            overflow-x: hidden;
         }
 
-        .key-gate {
+        .tab-buttons {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var(--glow);
         }
 
-        .key-input {
-            padding: 10px;
-            font-size: 1.2rem;
-            border: 2px solid var(--neon);
+        .tab-button {
+            padding: 10px 20px;
             background: transparent;
-            color: white;
-            text-align: center;
+            border: 2px solid var(--neon);
+            color: var(--neon);
             border-radius: 10px;
-            outline: none;
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .key-input:focus {
-            box-shadow: 0 0 10px var(--glow);
+        .tab-button:hover, .tab-button.active {
+            background: var(--neon);
+            color: black;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Link Cards */
+        .link-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glow);
+            border-radius: 15px;
+            padding: 15px;
+            transition: 0.3s;
+            margin: 10px;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        /* Key Section */
+        .key-section {
+            text-align: center;
+            margin-top: 20px;
         }
 
         .key-button {
-            margin-top: 15px;
-            padding: 10px 20px;
+            padding: 15px 30px;
             background: var(--neon);
-            border: none;
             color: black;
-            font-size: 1.2rem;
+            border: none;
             border-radius: 10px;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -64,54 +99,46 @@
         .key-button:hover {
             background: rgba(0, 255, 0, 0.8);
         }
-
-        .error-shake {
-            animation: shake 0.3s ease-in-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-        }
-
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
 
-    <div id="keyGate" class="key-gate">
-        <h1>Enter Key to Unlock</h1>
-        <input type="text" id="keyInput" class="key-input" placeholder="Enter key...">
-        <button class="key-button" onclick="checkKey()">Submit</button>
+    <header>
+        <h1>TIXU</h1>
+        <p>🔥 Made from fevber, now get back to work! 🔥</p>
+    </header>
+
+    <div class="tab-buttons">
+        <button class="tab-button" data-tab="games"><i class="fas fa-gamepad"></i> Games</button>
+        <button class="tab-button" data-tab="proxy"><i class="fa-solid fa-robot"></i> Proxy</button>
+        <button class="tab-button" data-tab="key"><i class="fa-solid fa-key"></i> Get Key</button>
     </div>
 
-    <div id="mainContent" class="hidden">
-        <h1>Welcome to TIXU</h1>
-        <p>🔥 You have unlocked access! 🔥</p>
+    <div class="tab-content" id="games">
+        <div class="link-card">
+            <a href="https://TIXU-RAMP.github.io/PAGE/Games/Minecraft.html" class="link">
+                <i class="fa-solid fa-cube"></i> Minecraft
+            </a>
+        </div>
+        <div class="link-card">
+            <a href="https://TIXU-RAMP.github.io/PAGE/Games/Street-fighter-2.html" class="link">
+                <i class="fa-solid fa-user-ninja"></i> Street Fighter 2
+            </a>
+        </div>
     </div>
 
-    <script>
-        function checkKey() {
-            const correctKey = "02860";
-            const input = document.getElementById("keyInput").value;
-            const keyGate = document.getElementById("keyGate");
-            const mainContent = document.getElementById("mainContent");
-
-            if (input === correctKey) {
-                keyGate.classList.add("hidden");
-                mainContent.classList.remove("hidden");
-            } else {
-                document.getElementById("keyInput").classList.add("error-shake");
-                setTimeout(() => {
-                    document.getElementById("keyInput").classList.remove("error-shake");
-                }, 300);
-            }
-        }
-    </script>
-
+    <div class="tab-content" id="proxy">
+        <div class="link-card">
+            <a href="https://uwananinisiyokka.allez.la/" class="link">
+                <i class="fa-solid fa-robot"></i> Proxy 1
+            </a>
+        </div>
+        <div class="link-card">
+            <a href="https://sheneedaride.now1.tv/" class="link">
+                <i class="fa-solid fa-robot"></i> Proxy 2
+            </a>
+        </div>
+    </div>
+    
 </body>
 </html>
