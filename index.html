@@ -21,7 +21,6 @@
             margin: 0;
             padding: 20px;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         .bg-animation {
@@ -31,20 +30,22 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(circle, rgba(0, 255, 0, 0.1) 10%, transparent 70%);
-            animation: bgPulse 10s infinite alternate;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+            animation: bgMove 20s infinite linear;
         }
 
-        @keyframes bgPulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.1); opacity: 1; }
+        @keyframes bgMove {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 15px;
             border: 1px solid var(--glow);
             box-shadow: 0 0 15px var(--glow);
@@ -56,125 +57,39 @@
             text-shadow: 0 0 10px var(--glow);
         }
 
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            border: 1px solid var(--glow);
-        }
-
-        .tab-button {
-            padding: 10px 20px;
-            background: transparent;
-            border: 2px solid var(--neon);
-            color: var(--neon);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .tab-button:hover, .tab-button.active {
-            background: var(--neon);
-            color: black;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         /* Search Bar */
         .search-container {
             text-align: center;
             margin-bottom: 20px;
         }
 
-        .search-bar {
+        .search-container input {
             padding: 10px;
-            width: 80%;
-            max-width: 400px;
+            width: 50%;
             border: 2px solid var(--neon);
             background: transparent;
             color: white;
             font-size: 1rem;
-            border-radius: 10px;
             text-align: center;
             transition: 0.3s;
         }
 
-        .search-bar:focus {
+        .search-container input:focus {
             outline: none;
-            box-shadow: 0 0 15px var(--glow);
+            box-shadow: 0 0 10px var(--glow);
         }
 
-        /* Password Modal */
-        .password-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .password-box {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 30px;
-            border-radius: 10px;
-            border: 2px solid var(--neon);
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .password-box.shake {
-            animation: shake 0.5s;
-        }
-
+        /* Shake animation */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-10px); }
-            40%, 80% { transform: translateX(10px); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
         }
 
-        .password-box input {
-            padding: 10px;
-            width: 100%;
-            border: 2px solid var(--neon);
-            background: transparent;
-            color: white;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        .password-box button {
-            margin-top: 10px;
-            padding: 10px;
-            background: var(--neon);
-            border: none;
-            color: black;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .password-box button:hover {
-            background: rgba(0, 255, 0, 0.8);
+        .wrong-password {
+            animation: shake 0.3s;
+            border: 2px solid red !important;
         }
 
     </style>
@@ -184,49 +99,93 @@
 
     <header>
         <h1>TIXU</h1>
-        <p>🔥 Made from fevber, now get back to work! 🔥</p>
+        <p>Made from fevber now get back to work🔥</p>
     </header>
 
+    <!-- Search Bar -->
     <div class="search-container">
-        <input type="text" class="search-bar" placeholder="Search...">
+        <input type="text" id="searchBar" placeholder="Search something...">
     </div>
 
     <div class="tab-buttons">
-        <button class="tab-button" data-tab="languages"><i class="fas fa-code"></i> Languages</button>
+        <button class="tab-button" data-tab="proxy"><i class="fas fa-gamepad"></i> Proxy</button>
+        <button class="tab-button" data-tab="games"><i class="fa-solid fa-dragon"></i> Games</button>
+        <button class="tab-button" data-tab="languages"><i class="fa-solid fa-code"></i> Languages</button>
+    </div>
+
+    <div class="tab-content" id="proxy">
+        <div class="link-card">
+            <a href="#" class="link"><i class="fa-solid fa-robot"></i> Proxy 1</a>
+        </div>
+    </div>
+
+    <div class="tab-content" id="games">
+        <div class="link-card">
+            <a href="#" class="link"><i class="fa-solid fa-bowling-ball"></i> Slope</a>
+        </div>
     </div>
 
     <div class="tab-content" id="languages">
-        <div class="label-card"><i class="fa-solid fa-code"></i> HTML</div>
-        <div class="label-card"><i class="fa-solid fa-code"></i> CSS</div>
-        <div class="label-card"><i class="fa-solid fa-code"></i> JavaScript</div>
-        <div class="label-card"><i class="fa-solid fa-code"></i> Python</div>
-        <div class="label-card"><i class="fa-solid fa-code"></i> C++</div>
+        <div class="label-card">
+            <i class="fa-solid fa-code"></i> HTML
+        </div>
+        <div class="label-card">
+            <i class="fa-solid fa-code"></i> CSS
+        </div>
+        <div class="label-card">
+            <i class="fa-solid fa-code"></i> JavaScript
+        </div>
+        <div class="label-card">
+            <i class="fa-solid fa-code"></i> Python
+        </div>
+        <div class="label-card">
+            <i class="fa-solid fa-code"></i> Lua
+        </div>
     </div>
 
+    <!-- Password Modal -->
     <div class="password-modal" id="passwordModal">
-        <div class="password-box">
-            <input type="password" id="passwordInput" placeholder="Enter password">
-            <button id="passwordSubmit">Submit</button>
-        </div>
+        <form id="passwordForm">
+            <input type="password" id="password" placeholder="Enter password" required>
+            <button type="submit">Submit</button>
+        </form>
+        <button class="lootlink-button" onclick="window.location.href='https://paste.ee/r/7VrOxy7q';">Key</button>
     </div>
 
     <script>
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                button.classList.add('active');
                 document.getElementById(button.dataset.tab).classList.add('active');
             });
         });
 
-        document.getElementById('passwordSubmit').addEventListener('click', function() {
-            const input = document.getElementById('passwordInput');
-            if (input.value === "02860") {
-                document.getElementById('passwordModal').style.display = "none";
+        const correctPassword = "02860";
+
+        document.getElementById('passwordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const input = document.getElementById('password');
+            if (input.value === correctPassword) {
+                document.getElementById('passwordModal').classList.remove('active');
             } else {
-                input.value = "";
-                document.querySelector('.password-box').classList.add('shake');
-                setTimeout(() => document.querySelector('.password-box').classList.remove('shake'), 500);
+                input.classList.add('wrong-password');
+                setTimeout(() => input.classList.remove('wrong-password'), 300);
             }
+        });
+
+        window.onload = () => {
+            document.getElementById('passwordModal').classList.add('active');
+        };
+
+        document.getElementById('searchBar').addEventListener('input', function() {
+            let filter = this.value.toLowerCase();
+            document.querySelectorAll('.link-card, .label-card').forEach(item => {
+                let text = item.textContent.toLowerCase();
+                item.style.display = text.includes(filter) ? '' : 'none';
+            });
         });
     </script>
 </body>
