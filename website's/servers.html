@@ -4,28 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Server Proxy Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --neon: #00ff00;
+            --glow: rgba(0, 255, 0, 0.3);
+            --dark: #000000;
         }
+
+        body {
+            background: var(--dark);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+            animation: bgMove 20s infinite linear;
+        }
+
+        @keyframes bgMove {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var(--glow);
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon);
+            text-shadow: 0 0 10px var(--glow);
+        }
+
         .warning {
             color: red;
             margin-bottom: 10px;
         }
+
         .server-list {
             margin-bottom: 20px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var(--glow);
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--neon);
+            color: var(--neon);
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .tab-button:hover, .tab-button.active {
+            background: var(--neon);
+            color: black;
+        }
+
+        .tab-content {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: grid;
+        }
+
+        .link-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glow);
+            border-radius: 15px;
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        button {
+            padding: 10px 20px;
+            background: var(--neon);
+            border: none;
+            color: black;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: var(--glow);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <h1>Server Proxy Access</h1>
+    </header>
+
     <div class="warning">
         Warning: Some buildings do not support proxies.
     </div>
     <div class="server-list">
         <!-- Add your server proxies here -->
-        <p>Server Proxy 1</p>
-        <p>Server Proxy 2</p>
-        <p>Server Proxy 3</p>
+        <p class="link-card">Server Proxy 1</p>
+        <p class="link-card">Server Proxy 2</p>
+        <p class="link-card">Server Proxy 3</p>
     </div>
     <button onclick="accessServers()">OK</button>
 
