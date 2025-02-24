@@ -5,22 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School Chat</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #chat-box { width: 80%; height: 400px; border: 1px solid #ccc; overflow-y: scroll; margin: auto; padding: 10px; }
-        #msg { width: 70%; padding: 5px; }
-        #send { padding: 5px 10px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background-color: #f0f0f0; 
+        }
+        #chat-box { 
+            width: 80%; 
+            height: 400px; 
+            border: 1px solid #ccc; 
+            overflow-y: scroll; 
+            margin: auto; 
+            padding: 10px; 
+            background-color: #fff; 
+        }
+        #msg { 
+            width: 70%; 
+            padding: 5px; 
+        }
+        #send { 
+            padding: 5px 10px; 
+        }
+        #login-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            text-align: center;
+        }
+        #username {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        #login-button {
+            padding: 10px 20px;
+        }
     </style>
 </head>
 <body>
-    <h2>School Chat</h2>
-    <div id="chat-box"></div>
-    <input type="text" id="msg" placeholder="Type a message...">
-    <button id="send">Send</button>
+    <div id="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Enter your username">
+        <button id="login-button">Login</button>
+    </div>
+    <div id="chat-container" style="display:none;">
+        <h2>School Chat</h2>
+        <div id="chat-box"></div>
+        <input type="text" id="msg" placeholder="Type a message...">
+        <button id="send">Send</button>
+    </div>
 
     <script>
+        const loginContainer = document.getElementById('login-container');
+        const chatContainer = document.getElementById('chat-container');
+        const loginButton = document.getElementById('login-button');
+        const usernameInput = document.getElementById('username');
         const chatBox = document.getElementById('chat-box');
         const msgInput = document.getElementById('msg');
         const sendBtn = document.getElementById('send');
+
+        loginButton.onclick = () => {
+            const username = usernameInput.value.trim();
+            if (username) {
+                localStorage.setItem('username', username);
+                loginContainer.style.display = 'none';
+                chatContainer.style.display = 'block';
+            }
+        };
 
         const ws = new WebSocket('ws://localhost:3000');
 
@@ -30,8 +81,10 @@
         };
 
         sendBtn.onclick = () => {
-            if (msgInput.value.trim()) {
-                ws.send(msgInput.value);
+            const message = msgInput.value.trim();
+            const username = localStorage.getItem('username');
+            if (message) {
+                ws.send(`${username}: ${message}`);
                 msgInput.value = '';
             }
         };
