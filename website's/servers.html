@@ -79,7 +79,7 @@
         .tab-button {
             padding: 10px 20px;
             background: transparent;
-            border: 2px solid var (--neon);
+            border: 2px solid var(--neon);
             color: var(--neon);
             border-radius: 10px;
             cursor: pointer;
@@ -116,6 +116,26 @@
         .link-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 20px var(--glow);
+        }
+
+        .link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .link:hover {
+            background: var(--glow);
+            transform: translateX(5px);
+        }
+
+        .link:active {
+            color: var(--neon);
         }
 
         button {
