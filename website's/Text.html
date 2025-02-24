@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School Text Channel</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -18,6 +20,9 @@
             margin: 0;
             padding: 20px;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .bg-animation {
@@ -37,21 +42,71 @@
             50% { transform: scale(1.2); }
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            border: 1px solid var(--glow);
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
             box-shadow: 0 0 15px var(--glow);
+            text-align: center;
         }
 
-        header h1 {
-            font-size: 2.5rem;
+        .container h1 {
+            font-size: 2rem;
             margin-bottom: 1rem;
             color: var(--neon);
             text-shadow: 0 0 10px var(--glow);
+        }
+
+        .container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border: 2px solid var(--neon);
+            border-radius: 10px;
+            background: transparent;
+            color: white;
+            outline: none;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: transparent;
+            border: 2px solid var(--neon);
+            color: var(--neon);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .container button:hover {
+            background: var(--neon);
+            color: black;
+        }
+
+        .container .social-login {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .container .social-login button {
+            width: 48%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container .social-login button i {
+            margin-right: 8px;
+        }
+
+        #chat-container {
+            display: none;
         }
 
         #chat {
@@ -94,55 +149,24 @@
             outline: none;
         }
 
-        button {
-            padding: 10px 20px;
-            background: transparent;
-            border: 2px solid var(--neon);
-            color: var(--neon);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: var(--neon);
-            color: black;
-        }
-
-        #login-container {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        #login-username {
-            width: 70%;
-            padding: 10px;
-            font-size: 1rem;
-            border: 2px solid var(--neon);
-            border-radius: 10px;
-            background: transparent;
-            color: white;
-            outline: none;
-        }
-
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
 
-    <header>
-        <h1>School Text Channel</h1>
-    </header>
-
-    <div id="login-container">
-        <input type="text" id="login-username" placeholder="Enter your name">
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
         <button onclick="login()">Login</button>
+        <div class="social-login">
+            <button onclick="loginWithGoogle()"><i class="fa-brands fa-google"></i> Google</button>
+            <button onclick="loginWithClever()"><i class="fa-solid fa-graduation-cap"></i> Clever</button>
+        </div>
     </div>
 
-    <div id="chat-container" style="display: none;">
+    <div class="container" id="chat-container">
+        <h1>School Text Channel</h1>
         <div id="chat"></div>
         <div class="input-container">
             <input type="text" id="message" placeholder="Type your message here...">
@@ -159,12 +183,24 @@
         });
 
         function login() {
-            var username = document.getElementById("login-username").value;
-            if (username.trim() !== "") {
-                localStorage.setItem("username", username);
+            var email = document.getElementById("login-email").value;
+            var password = document.getElementById("login-password").value;
+            if (email.trim() !== "" && password.trim() !== "") {
+                // Assume login is successful
+                localStorage.setItem("username", email.split('@')[0]);
                 document.getElementById("login-container").style.display = "none";
                 document.getElementById("chat-container").style.display = "block";
             }
+        }
+
+        function loginWithGoogle() {
+            // Implement Google login functionality
+            alert("Google login not implemented.");
+        }
+
+        function loginWithClever() {
+            // Implement Clever login functionality
+            alert("Clever login not implemented.");
         }
 
         function sendMessage() {
