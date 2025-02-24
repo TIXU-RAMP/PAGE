@@ -1,7 +1,5 @@
 BUTTONS
-<button class="tab-button" data-tab="your_tab_id">
-    <i class="fas fa-icon_name"></i> Your Tab Title
-</button>
+<div class="link-card"><a href="google.com" class="link">Logo.com HTML</a></div>
 
 TABS
 <div class="tab-content" id="your_tab_id">
