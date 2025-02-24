@@ -194,13 +194,13 @@
         }
 
         function loginWithGoogle() {
-            // Implement Google login functionality
-            alert("Google login not implemented.");
+            // Redirect to Google OAuth 2.0 authorization endpoint
+            window.location.href = "https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?access_type=offline&client_id=YOUR_GOOGLE_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email%20profile&state=state_parameter_passthrough_value&flowName=GeneralOAuthFlow";
         }
 
         function loginWithClever() {
-            // Implement Clever login functionality
-            alert("Clever login not implemented.");
+            // Redirect to Clever OAuth 2.0 authorization endpoint
+            window.location.href = "https://clever.com/oauth/authorize?response_type=code&client_id=YOUR_CLEVER_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:user_id&state=state_parameter_passthrough_value";
         }
 
         function sendMessage() {
