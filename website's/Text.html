@@ -1,1 +1,26 @@
-hey ai add more here man basically discord
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School Text Channel</title>
+</head>
+<body>
+    <h1>School Text Channel</h1>
+    <div id="chat" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;"></div>
+    <input type="text" id="message" placeholder="Type your message here..." style="width: 80%;">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        function sendMessage() {
+            var message = document.getElementById("message").value;
+            if (message.trim() !== "") {
+                var chat = document.getElementById("chat");
+                var newMessage = document.createElement("div");
+                newMessage.textContent = message;
+                chat.appendChild(newMessage);
+                document.getElementById("message").value = "";
+                chat.scrollTop = chat.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
