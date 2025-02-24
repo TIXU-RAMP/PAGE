@@ -3,219 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Texting channel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>School Chat</title>
     <style>
-        :root {
-            --neon: #00ff00;
-            --glow: rgba(0, 255, 0, 0.3);
-            --dark: #000000;
-        }
-
-        body {
-            background: var(--dark);
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
-            animation: bgMove 20s infinite linear;
-        }
-
-        @keyframes bgMove {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .container {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 0 15px var(--glow);
-            text-align: center;
-        }
-
-        .container h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--neon);
-            text-shadow: 0 0 10px var(--glow);
-        }
-
-        .container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 1rem;
-            border: 2px solid var(--neon);
-            border-radius: 10px;
-            background: transparent;
-            color: white;
-            outline: none;
-        }
-
-        .container button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            background: transparent;
-            border: 2px solid var(--neon);
-            color: var(--neon);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .container button:hover {
-            background: var(--neon);
-            color: black;
-        }
-
-        .container .social-login {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .container .social-login button {
-            width: 48%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container .social-login button i {
-            margin-right: 8px;
-        }
-
-        #chat-container {
-            display: none;
-        }
-
-        #chat {
-            border: 1px solid var(--glow);
-            padding: 10px;
-            height: 300px;
-            overflow-y: scroll;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        .message {
-            margin-bottom: 10px;
-        }
-
-        .message .user {
-            color: var(--neon);
-            font-weight: bold;
-        }
-
-        .message .text {
-            margin-left: 10px;
-        }
-
-        .input-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        #message {
-            width: 80%;
-            padding: 10px;
-            font-size: 1rem;
-            border: 2px solid var(--neon);
-            border-radius: 10px;
-            background: transparent;
-            color: white;
-            outline: none;
-        }
-
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #chat-box { width: 80%; height: 400px; border: 1px solid #ccc; overflow-y: scroll; margin: auto; padding: 10px; }
+        #msg { width: 70%; padding: 5px; }
+        #send { padding: 5px 10px; }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-
-    <div class="container" id="login-container">
-        <h1>Login</h1>
-        <input type="email" id="login-email" placeholder="Email">
-        <input type="password" id="login-password" placeholder="Password">
-        <button onclick="login()">Login</button>
-        <div class="social-login">
-            <button onclick="loginWithGoogle()"><i class="fa-brands fa-google"></i> Google</button>
-            <button onclick="loginWithClever()"><i class="fa-solid fa-graduation-cap"></i> Clever</button>
-        </div>
-    </div>
-
-    <div class="container" id="chat-container">
-        <h1>Text Beta</h1>
-        <div id="chat"></div>
-        <div class="input-container">
-            <input type="text" id="message" placeholder="Type your message here...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
-    </div>
+    <h2>School Chat</h2>
+    <div id="chat-box"></div>
+    <input type="text" id="msg" placeholder="Type a message...">
+    <button id="send">Send</button>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (localStorage.getItem("username")) {
-                document.getElementById("login-container").style.display = "none";
-                document.getElementById("chat-container").style.display = "block";
+        const chatBox = document.getElementById('chat-box');
+        const msgInput = document.getElementById('msg');
+        const sendBtn = document.getElementById('send');
+
+        const ws = new WebSocket('ws://localhost:3000');
+
+        ws.onmessage = event => {
+            chatBox.innerHTML += `<p>${event.data}</p>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        };
+
+        sendBtn.onclick = () => {
+            if (msgInput.value.trim()) {
+                ws.send(msgInput.value);
+                msgInput.value = '';
             }
-        });
-
-        function login() {
-            var email = document.getElementById("login-email").value;
-            var password = document.getElementById("login-password").value;
-            if (email.trim() !== "" && password.trim() !== "") {
-                // Assume login is successful
-                localStorage.setItem("username", email.split('@')[0]);
-                document.getElementById("login-container").style.display = "none";
-                document.getElementById("chat-container").style.display = "block";
-            }
-        }
-
-        function loginWithGoogle() {
-            // Redirect to Google OAuth 2.0 authorization endpoint
-            window.location.href = "https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?access_type=offline&client_id=606371921038-feedgq3epavbqbjmuushdqikkr0b91rc.apps.googleusercontent.com&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email%20profile&state=state_parameter_passthrough_value&flowName=GeneralOAuthFlow";
-        }
-
-        function loginWithClever() {
-            // Redirect to Clever OAuth 2.0 authorization endpoint
-            window.location.href = "https://clever.com/oauth/authorize?response_type=code&client_id=YOUR_CLEVER_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:user_id&state=state_parameter_passthrough_value";
-        }
-
-        function sendMessage() {
-            var message = document.getElementById("message").value;
-            var username = localStorage.getItem("username");
-            if (message.trim() !== "") {
-                var chat = document.getElementById("chat");
-                var newMessage = document.createElement("div");
-                newMessage.classList.add("message");
-                newMessage.innerHTML = '<span class="user">' + username + ':</span> <span class="text">' + message + '</span>';
-                chat.appendChild(newMessage);
-                document.getElementById("message").value = "";
-                chat.scrollTop = chat.scrollHeight;
-            }
-        }
+        };
     </script>
 </body>
 </html>
