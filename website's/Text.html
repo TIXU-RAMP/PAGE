@@ -84,18 +84,7 @@
         }
 
         #message {
-            width: 70%;
-            padding: 10px;
-            font-size: 1rem;
-            border: 2px solid var(--neon);
-            border-radius: 10px;
-            background: transparent;
-            color: white;
-            outline: none;
-        }
-
-        #username {
-            width: 20%;
+            width: 80%;
             padding: 10px;
             font-size: 1rem;
             border: 2px solid var(--neon);
@@ -120,6 +109,25 @@
             color: black;
         }
 
+        #login-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #login-username {
+            width: 70%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid var(--neon);
+            border-radius: 10px;
+            background: transparent;
+            color: white;
+            outline: none;
+        }
+
     </style>
 </head>
 <body>
@@ -129,19 +137,40 @@
         <h1>School Text Channel</h1>
     </header>
 
-    <div id="chat"></div>
+    <div id="login-container">
+        <input type="text" id="login-username" placeholder="Enter your name">
+        <button onclick="login()">Login</button>
+    </div>
 
-    <div class="input-container">
-        <input type="text" id="username" placeholder="Your name">
-        <input type="text" id="message" placeholder="Type your message here...">
-        <button onclick="sendMessage()">Send</button>
+    <div id="chat-container" style="display: none;">
+        <div id="chat"></div>
+        <div class="input-container">
+            <input type="text" id="message" placeholder="Type your message here...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (localStorage.getItem("username")) {
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("chat-container").style.display = "block";
+            }
+        });
+
+        function login() {
+            var username = document.getElementById("login-username").value;
+            if (username.trim() !== "") {
+                localStorage.setItem("username", username);
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("chat-container").style.display = "block";
+            }
+        }
+
         function sendMessage() {
-            var username = document.getElementById("username").value;
             var message = document.getElementById("message").value;
-            if (username.trim() !== "" && message.trim() !== "") {
+            var username = localStorage.getItem("username");
+            if (message.trim() !== "") {
                 var chat = document.getElementById("chat");
                 var newMessage = document.createElement("div");
                 newMessage.classList.add("message");
