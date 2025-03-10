@@ -1,4 +1,4 @@
-47<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +10,13 @@
     <style>
         :root {
             --neon: #00ff00;
-            --glow: rgba(0, 255, 0, 0.3);
-            --dark: #000000;
+            --glow: rgba(0, 255, 0, 0.4);
+            --dark: #1a1a1a;
+            --input-border: #2b2b2b;
+            --input-focus: #00ff80;
+            --background-gradient: linear-gradient(45deg, #00ff00, #009900);
+            --btn-hover: rgba(0, 255, 0, 0.7);
+            --neon-glow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 50px #00ff00;
         }
 
         body {
@@ -21,6 +26,10 @@
             margin: 0;
             padding: 20px;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .bg-animation {
@@ -30,63 +39,81 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
-            animation: bgMove 20s infinite linear;
+            background: var(--background-gradient);
+            animation: bgMove 30s infinite linear;
         }
 
         @keyframes bgMove {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.15); }
         }
 
         header {
             text-align: center;
             margin-bottom: 3rem;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
             border: 1px solid var(--glow);
-            box-shadow: 0 0 15px var(--glow);
+            box-shadow: var(--neon-glow);
+            width: 100%;
+            max-width: 800px;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             color: var(--neon);
-            text-shadow: 0 0 10px var(--glow);
+            text-shadow: var(--neon-glow);
         }
 
-        .search-container {
+        header p {
+            font-size: 1.2rem;
+            color: #b0ffb0;
+        }
+
+        .search-container, .password-container {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
         }
 
-        .search-box {
-            width: 80%;
-            padding: 10px;
+        .search-box, .password-box {
+            width: 90%;
+            padding: 12px;
             font-size: 1rem;
-            border: 2px solid var(--neon);
+            border: 2px solid var(--input-border);
             border-radius: 10px;
             background: transparent;
             color: white;
             outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px var(--glow);
+        }
+
+        .search-box:focus, .password-box:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 15px var(--input-focus);
+        }
+
+        .search-box::placeholder, .password-box::placeholder {
+            color: #cccccc;
         }
 
         .tab-buttons {
             display: flex;
-            gap: 10px;
+            gap: 20px;
             flex-wrap: wrap;
             margin-bottom: 20px;
             padding: 15px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
-            border: 1px solid var (--glow);
+            border: 1px solid var(--glow);
+            box-shadow: var(--neon-glow);
         }
 
         .tab-button {
-            padding: 10px 20px;
+            padding: 15px 25px;
             background: transparent;
             border: 2px solid var(--neon);
             color: var(--neon);
@@ -94,20 +121,22 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             transition: 0.3s;
+            font-size: 1.1rem;
         }
 
         .tab-button:hover, .tab-button.active {
-            background: var(--neon);
+            background: var(--btn-hover);
             color: black;
+            box-shadow: var(--neon-glow);
         }
 
         .tab-content {
             display: none;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.6s ease-in-out;
         }
 
         .tab-content.active {
@@ -115,16 +144,17 @@
         }
 
         .link-card {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--glow);
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--glow);
             border-radius: 15px;
             padding: 15px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--glow);
         }
 
         .link-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 20px var(--glow);
+            box-shadow: 0 0 25px var(--glow);
         }
 
         .link {
@@ -132,7 +162,7 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             padding: 10px;
             border-radius: 8px;
             transition: 0.3s;
@@ -140,12 +170,32 @@
 
         .link:hover {
             background: var(--glow);
-            transform: translateX(5px);
+            transform: translateX(6px);
         }
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        .image-anim {
+            width: 100%;
+            height: auto;
+            max-width: 600px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 15px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .password-container {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .password-box::placeholder {
+            color: var(--glow);
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -161,49 +211,29 @@
         <input type="text" class="search-box" id="searchInput" placeholder="Search...">
     </div>
 
+    <div class="password-container">
+        <input type="password" class="password-box" id="passwordInput" placeholder="Enter Password...">
+    </div>
+
+    <img src="https://via.placeholder.com/600x300.png?text=Apple-Style+Image" alt="Apple Style" class="image-anim">
+
     <div class="tab-buttons">
         <button class="tab-button" data-tab="games"><i class="fa-solid fa-dragon"></i> Games</button>
         <button class="tab-button" data-tab="languages"><i class="fa-solid fa-code"></i> Languages</button>
-        <button class="tab-button" data-tab="Misc"><i class="fa-solid fa-clipboard"></i> Misc</button> <!-- New tab button -->
-    </div>
-
-    <div class="tab-content" id="proxy">
-        <div class="link-card"><a href="https://proxy1.example" class="link"><i class="fa-solid fa-robot"></i> Proxy 1</a></div>
-        <div class="link-card"><a href="https://proxy2.example" class="link"><i class="fa-solid fa-robot"></i> Proxy 2</a></div>
+        <button class="tab-button" data-tab="Misc"><i class="fa-solid fa-clipboard"></i> Misc</button>
     </div>
 
     <div class="tab-content" id="games">
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/random.html" class="link"><i class="fa-solid fa-earth-europe"></i> randon Games</a></div>
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/escaping_the_prison.html" class="link"><i class="fa-solid fa-person-running"></i> Escaping pension</a></div>
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/We-become-what-we-behold.html" class="link"><i class="fa-solid fa-skull-crossbones"></i> We become what we behold</a></div>
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/Time-shooting-2.html" class="link"><i class="fa-solid fa-stopwatch-20"></i> Time Shooting</a></div>
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/Subway.html" class="link"><i class="fa-solid fa-train"></i> Subway surfers</a></div>
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/Street-fighter-2.html" class="link"><i class="fa-solid fa-user-ninja"></i> Street Fighter 2</a></div>
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/Slope.html" class="link"><i class="fa-solid fa-bowling-ball"></i> Slope</a></div>
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/Minecraft.html" class="link"><i class="fa-solid fa-cube"></i> Minecraft</a></div>
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/Gun-spin.html" class="link"><i class="fa-solid fa-gun"></i> Gun Spin</a></div>
-        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/1v1-lol.html" class="link"><i class="fa-solid fa-person-rifle"></i> 1v1.lol</a></div>
-        <div class="link-card"><a href="https://sz-games.github.io/games/zombie" class="link"><i class="fa-solid fa-hat-wizard"></i> Zombie mode</a></div>    
-        <div class="link-card"><a href="https://sz-games.github.io/games/game.html?game=https://sz-games.github.io/games/stack" class="link"><i class="fa-solid fa-square-full"></i> Stack</a></div>
-        <div class="link-card"><a href="google.com" class="link">Logo.com HTML</a></div>
-        <div class="link-card"><a href="google.com" class="link">Logo.com HTML</a></div>
-        <div class="link-card"><a href="google.com" class="link">Logo.com HTML</a></div>
-        <div class="link-card"><a href="google.com" class="link">Logo.com HTML</a></div>
-        <div class="link-card"><a href="google.com" class="link">Logo.com HTML</a></div>
-        <div class="link-card"><a href="google.com" class="link">Logo.com HTML</a></div>
-        
+        <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/Games/random.html" class="link"><i class="fa-solid fa-earth-europe"></i> Random Games</a></div>
+        <!-- Add more game links here -->
     </div>
 
     <div class="tab-content" id="languages">
         <div class="link-card"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" class="link"><i class="fa-brands fa-html5"></i> HTML</a></div>
-        <div class="link-card"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="link"><i class="fa-brands fa-css3-alt"></i> CSS</a></div>
-        <div class="link-card"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" class="link"><i class="fa-brands fa-js"></i> JavaScript</a></div>
-        <div class="link-card"><a href="https://www.python.org/doc/" class="link"><i class="fa-brands fa-python"></i> Python</a></div>
-        <div class="link-card"><a href="https://cplusplus.com/" class="link"><i class="fa-solid fa-code"></i> C++</a></div>
-        <div class="link-card"><a href="https://dev.java/" class="link"><i class="fa-brands fa-java"></i> Java</a></div>
+        <!-- Add more language links here -->
     </div>
 
-     <div class="tab-content" id="Misc">
+    <div class="tab-content" id="Misc">
         <div class="link-card"><a href="https://tixu-ramp.github.io/PAGE/website's/servers.html" class="link"><i class="fa-solid fa-face-smile"></i> Proxyies</a></div>
     </div>
 
