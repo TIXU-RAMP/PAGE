@@ -1,73 +1,463 @@
-# Lua Executor: The Ultimate Solution for Your Scripting Needs
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Superior Lua Executor</title>
+    <title>TIXU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
+        :root {
+            --neon: #00ff00;
+            --glow: rgba(0, 255, 0, 0.3);
+            --dark: #000000;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        header {
-            background: #007BFF;
+            background: var(--dark);
             color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        h1 {
+            font-family: 'Poppins', sans-serif;
             margin: 0;
-        }
-        .content {
-            margin: 20px 0;
             padding: 20px;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
         }
-        .features {
-            list-style-type: none;
-            padding: 0;
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+            animation: bgMove 20s infinite linear;
         }
-        .features li {
-            background: #e9ecef;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
+
+        @keyframes bgMove {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
-        footer {
+
+        header {
             text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var(--glow);
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon);
+            text-shadow: 0 0 10px var(--glow);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 80%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid var(--neon);
+            border-radius: 10px;
+            background: transparent;
+            color: white;
+            outline: none;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var (--glow);
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--neon);
+            color: var(--neon);
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .tab-button:hover, .tab-button.active {
+            background: var(--neon);
+            color: black;
+        }
+
+        .tab-content {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: grid;
+        }
+
+        .link-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glow);
+            border-radius: 15px;
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .link {
+            color: var(--neon);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .link:hover {
+            background: var(--glow);
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 15px 30px;
             margin-top: 20px;
-            font-size: 0.9em;
+            font-size: 1.2rem;
+            color: black;
+            background: var(--neon);
+            border: 2px solid var(--neon);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .download-button:hover {
+            background: var(--dark);
+            color: var(--neon);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
 
-<header>
-    <h1>Welcome to Our Lua Executor</h1>
-</header>
+    <header>
+        <h1>Welcome to Our Lua Executor</h1>
+    </header>
 
-<div class="content">
-    <h2>Why Choose Our Lua Executor?</h2>
-    <p>Our Lua executor stands out from the competition with its unparalleled performance and user-friendly interface. Here are some of the key features:</p>
-    <ul class="features">
-        <li>High-Speed Execution: Experience lightning-fast script execution.</li>
-        <li>Robust Security: Advanced security measures to protect your scripts.</li>
-        <li>User-Friendly Interface: Intuitive design for both beginners and experts.</li>
-        <li>Regular Updates: Stay ahead with frequent updates and new features.</li>
-        <li>Comprehensive Support: Our dedicated support team is here to assist you.</li>
-    </ul>
-</div>
+    <div class="search-container">
+        <input type="text" class="search-box" id="searchInput" placeholder="Search...">
+    </div>
 
-<footer>
-    <p>&copy; 2023 Superior Lua Executor. All rights reserved.</p>
-</footer>
+    <div class="tab-buttons">
+        <button class="tab-button" data-tab="features"><i class="fa-solid fa-list"></i> Features</button>
+    </div>
 
+    <div class="tab-content" id="features">
+        <div class="link-card">
+            <h2>Why Choose Our Lua Executor?</h2>
+            <p>Our Lua executor stands out from the competition with its unparalleled performance and user-friendly interface. Here are some of the key features:</p>
+            <ul class="features">
+                <li><i class="fa-solid fa-tachometer-alt"></i> High-Speed Execution: Experience lightning-fast script execution.</li>
+                <li><i class="fa-solid fa-shield-alt"></i> Robust Security: Advanced security measures to protect your scripts.</li>
+                <li><i class="fa-solid fa-user"></i> User-Friendly Interface: Intuitive design for both beginners and experts.</li>
+                <li><i class="fa-solid fa-sync-alt"></i> Regular Updates: Stay ahead with frequent updates and new features.</li>
+                <li><i class="fa-solid fa-headset"></i> Comprehensive Support: Our dedicated support team is here to assist you.</li>
+            </ul>
+            <a href="path/to/download" class="download-button"><i class="fa-solid fa-download"></i> Download Now</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Superior Lua Executor. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                button.classList.add('active');
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+
+        document.getElementById("searchInput").addEventListener("input", function() {
+            let filter = this.value.toLowerCase();
+            document.querySelectorAll('.link-card').forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(filter) ? "block" : "none";
+            });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIXU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --neon: #00ff00;
+            --glow: rgba(0, 255, 0, 0.3);
+            --dark: #000000;
+        }
+
+        body {
+            background: var(--dark);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+            animation: bgMove 20s infinite linear;
+        }
+
+        @keyframes bgMove {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var(--glow);
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon);
+            text-shadow: 0 0 10px var(--glow);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 80%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid var(--neon);
+            border-radius: 10px;
+            background: transparent;
+            color: white;
+            outline: none;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid var (--glow);
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--neon);
+            color: var(--neon);
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .tab-button:hover, .tab-button.active {
+            background: var(--neon);
+            color: black;
+        }
+
+        .tab-content {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: grid;
+        }
+
+        .link-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glow);
+            border-radius: 15px;
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .link {
+            color: var(--neon);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .link:hover {
+            background: var(--glow);
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: black;
+            background: var(--neon);
+            border: 2px solid var(--neon);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .download-button:hover {
+            background: var(--dark);
+            color: var(--neon);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <h1>Welcome to Our Lua Executor</h1>
+    </header>
+
+    <div class="search-container">
+        <input type="text" class="search-box" id="searchInput" placeholder="Search...">
+    </div>
+
+    <div class="tab-buttons">
+        <button class="tab-button" data-tab="features"><i class="fa-solid fa-list"></i> Features</button>
+    </div>
+
+    <div class="tab-content" id="features">
+        <div class="link-card">
+            <h2>Why Choose Our Lua Executor?</h2>
+            <p>Our Lua executor stands out from the competition with its unparalleled performance and user-friendly interface. Here are some of the key features:</p>
+            <ul class="features">
+                <li><i class="fa-solid fa-tachometer-alt"></i> High-Speed Execution: Experience lightning-fast script execution.</li>
+                <li><i class="fa-solid fa-shield-alt"></i> Robust Security: Advanced security measures to protect your scripts.</li>
+                <li><i class="fa-solid fa-user"></i> User-Friendly Interface: Intuitive design for both beginners and experts.</li>
+                <li><i class="fa-solid fa-sync-alt"></i> Regular Updates: Stay ahead with frequent updates and new features.</li>
+                <li><i class="fa-solid fa-headset"></i> Comprehensive Support: Our dedicated support team is here to assist you.</li>
+            </ul>
+            <a href="path/to/download" class="download-button"><i class="fa-solid fa-download"></i> Download Now</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Superior Lua Executor. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                button.classList.add('active');
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+
+        document.getElementById("searchInput").addEventListener("input", function() {
+            let filter = this.value.toLowerCase();
+            document.querySelectorAll('.link-card').forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(filter) ? "block" : "none";
+            });
+        });
+    </script>
 </body>
 </html>
